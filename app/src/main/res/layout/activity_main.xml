@@ -6,14 +6,23 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="10dp"
+        android:src="@drawable/logo"
+        />
+
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:text="Attendance dedo bhai"
         android:fontFamily="cursive"
         android:textColor="@color/black"
         android:layout_marginTop="20dp"
+        android:layout_marginStart="90dp"
         android:textSize="40dp"/>
 
 
