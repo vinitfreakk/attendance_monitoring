@@ -2,4 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="logreg">#152534</color>
+    <color name="border">#808080</color>
+    <color name="btnback">#c0e862</color>
+
 </resources>
