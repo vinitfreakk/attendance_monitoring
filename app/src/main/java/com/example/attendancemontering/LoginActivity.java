@@ -1,5 +1,6 @@
 package com.example.attendancemontering;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -10,20 +11,36 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class LoginActivity extends AppCompatActivity {
     EditText email,password;
     TextView register;
     Button login;
 
+    private FirebaseAuth auth;
+
+    FirebaseDatabase database;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        //making instance of firebasedatabase and firebaseAuth
+        auth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
+
         //initializing variable
-        email = findViewById(R.id.name);
-        password =findViewById(R.id.email);
-        login = findViewById(R.id.registerbtn);
-        register = findViewById(R.id.registertv);
+        email = this.findViewById(R.id.lemail);
+        password =this.findViewById(R.id.lpassword);
+        login = this.findViewById(R.id.loginbtn);
+        register = this.findViewById(R.id.registertv);
 
         //applying intent to register activity
 
@@ -42,18 +59,27 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String saveemail = email.getText().toString();
                 String savepassword = password.getText().toString();
-                if(saveemail.equals(null)&&savepassword.equals(null)){
-                    Toast.makeText(LoginActivity.this, "Don't leave the filed empty", Toast.LENGTH_SHORT).show();
-                } else if (savepassword.length()>=6) {
-                    Toast.makeText(LoginActivity.this, "Password must at least contain 6 character", Toast.LENGTH_SHORT).show();
-                }else {
-                    //login code here
-                }
+                auth.signInWithEmailAndPassword(saveemail,savepassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            Toast.makeText(LoginActivity.this,"logged in Successfully", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }else {
+                            Toast.makeText(LoginActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
             }
         });
 
 
 
 
+
+
     }
+
 }
