@@ -10,17 +10,29 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.ktx.Firebase;
+
 public class RegistartionActivity extends AppCompatActivity {
 
     EditText email,password,name;
     Button  register;
     TextView Login;
     ImageView backbtn;
+
+    private FirebaseAuth auth;
+    FirebaseDatabase database;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registartion);
 
+
+        //making instance of firebasedatabase and firebaseAuth
+        auth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
         //initializing variables
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
@@ -28,6 +40,7 @@ public class RegistartionActivity extends AppCompatActivity {
         backbtn = findViewById(R.id.backbtn);
         Login = findViewById(R.id.login);
         register = findViewById(R.id.registerbtn);
+
 
         //applying intent filter to login textview and back backbtn
 
@@ -51,11 +64,18 @@ public class RegistartionActivity extends AppCompatActivity {
             }
         });
 
+        register.setOnClickListener(new View.OnClickListener() {
 
+            @Override
+            public void onClick(View v) {
+                String savemail = email.getText().toString();
+                String savepassword = email.getText().toString();
+                auth.createUserWithEmailAndPassword(savemail,savepassword);
 
-
-
-
+            }
+        });
 
     }
+
+
 }

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "877034378503",
+    "project_id": "attendancemontering",
+    "storage_bucket": "attendancemontering.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:877034378503:android:fc5a5a62e176c03e14a1a2",
+        "android_client_info": {
+          "package_name": "com.example.attendancemontering"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "877034378503-tasbs1prhq0up5in1fjm14fn5alc4nui.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEBjrxpOtEj_a78bH6O2FnkfzNULmjddM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "877034378503-tasbs1prhq0up5in1fjm14fn5alc4nui.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
