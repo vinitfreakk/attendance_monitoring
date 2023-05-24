@@ -44,6 +44,7 @@ public class LoginActivity extends AppCompatActivity {
 
         //applying intent to register activity
 
+
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             Toast.makeText(LoginActivity.this,"logged in Successfully", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                            Intent intent = new Intent(LoginActivity.this,SelectPunchInPunchOut.class);
                             startActivity(intent);
                             finish();
                         }else {

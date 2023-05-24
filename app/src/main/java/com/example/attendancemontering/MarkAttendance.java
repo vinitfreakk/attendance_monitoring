@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.concurrent.Executor;
@@ -25,11 +26,22 @@ It allows you to customize the appearance and behavior of the biometric dialog, 
     ConstraintLayout mMainlayout;
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mark_attendance);
 
+
+
+
+        //caliing biometric function.
+        biometriccheck();
+    }
+
+
+    public void biometriccheck() {
         mMainlayout = findViewById(R.id.mainlayout);
         BiometricManager biometricManager = BiometricManager.from(this);
         switch (biometricManager.canAuthenticate()) {
@@ -58,7 +70,7 @@ It allows you to customize the appearance and behavior of the biometric dialog, 
             public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
                 super.onAuthenticationSucceeded(result);
                 Toast.makeText(MarkAttendance.this, "Login success", Toast.LENGTH_SHORT).show();
-               /* mMainlayout.setVisibility(View.VISIBLE);*/
+                /* mMainlayout.setVisibility(View.VISIBLE);*/
             }
 
             @Override
@@ -73,3 +85,4 @@ It allows you to customize the appearance and behavior of the biometric dialog, 
         biometricPrompt.authenticate(promptInfo);
     }
 }
+

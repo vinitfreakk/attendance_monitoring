@@ -16,23 +16,26 @@
         android:theme="@style/Theme.AttendanceMontering"
         tools:targetApi="31">
         <activity
+            android:name=".SelectPunchInPunchOut"
+            android:exported="true">
+
+        </activity>
+        <activity
             android:name=".MarkAttendance"
+            android:exported="true">
+
+        </activity>
+        <activity
+            android:name=".RegistartionActivity"
+            android:exported="true"></activity>
+        <activity
+            android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".RegistartionActivity"
-            android:exported="true">
-
-        </activity>
-        <activity
-            android:name=".LoginActivity"
-            android:exported="true">
-
         </activity>
         <activity
             android:name=".MainActivity"
