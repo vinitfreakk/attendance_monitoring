@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,6 +28,8 @@ public class LoginActivity extends AppCompatActivity {
 
     FirebaseDatabase database;
 
+    FirebaseUser firebaseuser; //used to get the current user.
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +38,7 @@ public class LoginActivity extends AppCompatActivity {
         //making instance of firebasedatabase and firebaseAuth
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
+        firebaseuser=auth.getCurrentUser();
 
         //initializing variable
         email = this.findViewById(R.id.lemail);
@@ -66,6 +70,9 @@ public class LoginActivity extends AppCompatActivity {
                         if(task.isSuccessful()){
                             Toast.makeText(LoginActivity.this,"logged in Successfully", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(LoginActivity.this,SelectPunchInPunchOut.class);
+                            intent.putExtra("userid",firebaseuser.getUid());
+                            Log.d("user", firebaseuser.getUid());
+                            Toast.makeText(LoginActivity.this,firebaseuser.getUid() , Toast.LENGTH_SHORT).show();
                             startActivity(intent);
                             finish();
                         }else {
