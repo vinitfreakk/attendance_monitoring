@@ -15,7 +15,6 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DigitalClock;
@@ -27,11 +26,13 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -52,9 +53,18 @@ It allows you to customize the appearance and behavior of the biometric dialog, 
     TextView locationatt;
     DigitalClock digitalClock;
 
+    String punchInTime;
+
+    Calendar calendar;
+
+    Intent id;
+
+    String uid;
+
     //location
     FusedLocationProviderClient fusedLocationProviderClient;
     private final static int REQUEST_CODE = 100;
+    private String timedede;
 
 
     FirebaseDatabase database;
@@ -78,30 +88,19 @@ It allows you to customize the appearance and behavior of the biometric dialog, 
 
 
         //collecting data from intents
-        Intent id  = getIntent();
-        String uid = id.getStringExtra("userid");
+        id  = getIntent();
+        uid = id.getStringExtra("userid");
 
         //Firebase
         database = FirebaseDatabase.getInstance();
        /* database.getReference().child("Users").child("Attendance");*/
 
         //time
-        Calendar calendar = Calendar.getInstance();
+         calendar = Calendar.getInstance();
 
-        LocalDate currentDate = null;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            currentDate = LocalDate.now();
-        }
-        DateTimeFormatter formatter = null;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            formatter = DateTimeFormatter.ofPattern("dd_MM_yyyy");
-        }
-        final String formattedDate;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            formattedDate = currentDate.format(formatter);
-        } else {
-            formattedDate = "Unknown"; // provide a default value
-        }
+
+
+
 
 
         //location code
@@ -112,16 +111,7 @@ It allows you to customize the appearance and behavior of the biometric dialog, 
             @Override
             public void onClick(View v) {
                 PunchInbiometriccheck();
-                /*UserAttendance timestamp = new UserAttendance("Present");*/
-                int hour = calendar.get(Calendar.HOUR_OF_DAY); // 24-hour format
-                int minute = calendar.get(Calendar.MINUTE);
-                String time = Integer.toString(hour)+":"+Integer.toString(minute);
 
-
-                /* HashMap<String,String>timestamp = new HashMap<>();*/
-              /*  timestamp.put(time,"Present");*/
-                UserAttendance attendance = new UserAttendance(true,false,time,time);
-                database.getReference().child("Users").child(uid).child("Attendance").child(formattedDate).setValue(attendance);
             }
         });
 
@@ -129,11 +119,11 @@ It allows you to customize the appearance and behavior of the biometric dialog, 
             @Override
             public void onClick(View v) {
                 PunchOutbiometriccheck();
-                int hour = calendar.get(Calendar.HOUR_OF_DAY); // 24-hour format
+               /* int hour = calendar.get(Calendar.HOUR_OF_DAY); // 24-hour format
                 int minute = calendar.get(Calendar.MINUTE);
                 String time = Integer.toString(hour)+":"+Integer.toString(minute);
-                UserAttendance attendance = new UserAttendance(true,true,time,time);
-                database.getReference().child("Users").child(uid).child("Attendance").child(formattedDate).setValue(attendance);
+                UserAttendance attendance = new UserAttendance(true,true,time,time);*/
+             /*   database.getReference().child("Users").child(uid).child("Attendance").child(formattedDate).setValue(attendance);*/
             }
         });
 
@@ -167,6 +157,31 @@ It allows you to customize the appearance and behavior of the biometric dialog, 
             @Override
             public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
                 super.onAuthenticationSucceeded(result);
+                /*UserAttendance timestamp = new UserAttendance("Present");*/
+                int hour = calendar.get(Calendar.HOUR_OF_DAY); // 24-hour format
+                int minute = calendar.get(Calendar.MINUTE);
+                punchInTime = Integer.toString(hour)+":"+Integer.toString(minute);
+
+
+                LocalDate currentDate = null;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                    currentDate = LocalDate.now();
+                }
+                DateTimeFormatter formatter = null;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                    formatter = DateTimeFormatter.ofPattern("dd_MM_yyyy");
+                }
+                final String formattedDate;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                    formattedDate = currentDate.format(formatter);
+                } else {
+                    formattedDate = "Unknown"; // provide a default value
+                }
+
+                /* HashMap<String,String>timestamp = new HashMap<>();*/
+                /*  timestamp.put(time,"Present");*/
+                UserAttendance attendance = new UserAttendance(true,false,punchInTime,"");
+                database.getReference().child("Users").child(uid).child("Attendance").child(formattedDate).setValue(attendance);
                 Toast.makeText(SelectPunchInPunchOut.this, "Login success", Toast.LENGTH_SHORT).show();
                 /* mMainlayout.setVisibility(View.VISIBLE);*/
             }
@@ -211,8 +226,34 @@ It allows you to customize the appearance and behavior of the biometric dialog, 
             @Override
             public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result){
                 super.onAuthenticationSucceeded(result);
+                int hour = calendar.get(Calendar.HOUR_OF_DAY); // 24-hour format
+                int minute = calendar.get(Calendar.MINUTE);
+                String punchOutTime = Integer.toString(hour)+":"+Integer.toString(minute);
+                LocalDate currentDate = null;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                    currentDate = LocalDate.now();
+                }
+                DateTimeFormatter formatter = null;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                    formatter = DateTimeFormatter.ofPattern("dd_MM_yyyy");
+                }
+                final String formattedDate;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                    formattedDate = currentDate.format(formatter);
+                } else {
+                    formattedDate = "Unknown"; // provide a default value
+                }
+
+
+                 HashMap attendance = new HashMap<>();
+                attendance.put("punchOut",true);
+                attendance.put("timeStampPunchOut",punchOutTime);
+
+
+
+               /* UserAttendance attendance = new UserAttendance(true,true,"15:20",punchOutTime);*/
+                database.getReference().child("Users").child(uid).child("Attendance").child(formattedDate).updateChildren(attendance);
                 Toast.makeText(SelectPunchInPunchOut.this, "Login success", Toast.LENGTH_SHORT).show();
-                /* mMainlayout.setVisibility(View.VISIBLE);*/
             }
 
             @Override

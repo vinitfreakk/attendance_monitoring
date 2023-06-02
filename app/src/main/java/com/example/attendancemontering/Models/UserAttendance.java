@@ -1,15 +1,29 @@
 package com.example.attendancemontering.Models;
 
 public class UserAttendance {
-    String name,Timestamp;
+    String TimeStampPunchIN, TimeStampPunchOut;
     Boolean punchIn,punchOut;
 
-    public UserAttendance(Boolean punchIn, Boolean punchOut, String name, String timestamp) {
+    public UserAttendance(Boolean punchIn, Boolean punchOut, String timestampin, String timestampout) {
         this.punchIn = punchIn;
         this.punchOut = punchOut;
-        this.name = name;
-        Timestamp = timestamp;
+        this.TimeStampPunchIN = timestampin;
+        TimeStampPunchOut = timestampout;
     }
+
+    public UserAttendance(String timeStampPunchOut, Boolean punchIn, Boolean punchOut) {
+        TimeStampPunchOut = timeStampPunchOut;
+        this.punchIn = punchIn;
+        this.punchOut = punchOut;
+    }
+/*public UserAttendance(String timeStampPunchIN, Boolean punchIn) {
+        TimeStampPunchIN = timeStampPunchIN;
+        this.punchIn = punchIn;
+    }
+    public UserAttendance(String timeStampPunchOut, Boolean punchOut) {
+        TimeStampPunchOut = timeStampPunchOut;
+        this.punchOut = punchOut;
+    }*/
 
     public UserAttendance() {
 
@@ -41,19 +55,19 @@ public class UserAttendance {
         this.punchOut = punchOut;
     }
 
-    public String getName() {
-        return name;
+    public String getTimeStampPunchIN() {
+        return TimeStampPunchIN;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTimeStampPunchIN(String timeStampPunchIN) {
+        this.TimeStampPunchIN = timeStampPunchIN;
     }
 
-    public String getTimestamp() {
-        return Timestamp;
+    public String getTimeStampPunchOut() {
+        return TimeStampPunchOut;
     }
 
-    public void setTimestamp(String timestamp) {
-        Timestamp = timestamp;
+    public void setTimeStampPunchOut(String timeStampPunchOut) {
+        TimeStampPunchOut = timeStampPunchOut;
     }
 }
