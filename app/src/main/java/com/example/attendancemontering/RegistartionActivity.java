@@ -77,24 +77,30 @@ public class RegistartionActivity extends AppCompatActivity {
                 String savemail = email.getText().toString();
                 String savepassword = password.getText().toString();
                 String savename = name.getText().toString();
-                auth.createUserWithEmailAndPassword(savemail,savepassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            String UId = task.getResult().getUser().getUid();
-                            Users users = new Users(savemail,savepassword,savename);
-                            database.getReference().child("Users").child(UId).setValue(users);
-                            Toast.makeText(RegistartionActivity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(RegistartionActivity.this,LoginActivity.class);
 
-                            startActivity(intent);
-                            finish();
+                if(savemail.isEmpty()&&savepassword.isEmpty()&&savename.isEmpty()){
+                    Toast.makeText(RegistartionActivity.this, "Fields cannot be empty", Toast.LENGTH_SHORT).show();
+                }else {
+                    auth.createUserWithEmailAndPassword(savemail,savepassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(task.isSuccessful()){
+                                String UId = task.getResult().getUser().getUid();
+                                Users users = new Users(savemail,savepassword,savename);
+                                database.getReference().child("Users").child(UId).setValue(users);
+                                Toast.makeText(RegistartionActivity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(RegistartionActivity.this,LoginActivity.class);
+
+                                startActivity(intent);
+                                finish();
+                            }
+                            else {
+                                Toast.makeText(RegistartionActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
                         }
-                        else {
-                            Toast.makeText(RegistartionActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+                    });
+                }
+
 
             }
         });

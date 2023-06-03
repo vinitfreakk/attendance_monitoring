@@ -64,22 +64,27 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String saveemail = email.getText().toString();
                 String savepassword = password.getText().toString();
-                auth.signInWithEmailAndPassword(saveemail,savepassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            Toast.makeText(LoginActivity.this,"logged in Successfully", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(LoginActivity.this,SelectPunchInPunchOut.class);
-                            intent.putExtra("userid",firebaseuser.getUid());
-                            Log.d("user", firebaseuser.getUid());
-                            Toast.makeText(LoginActivity.this,firebaseuser.getUid() , Toast.LENGTH_SHORT).show();
-                            startActivity(intent);
-                            finish();
-                        }else {
-                            Toast.makeText(LoginActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                if(!saveemail.isEmpty()&&!savepassword.isEmpty()){
+                    auth.signInWithEmailAndPassword(saveemail,savepassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(task.isSuccessful()){
+                                Toast.makeText(LoginActivity.this,"logged in Successfully", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(LoginActivity.this,SelectPunchInPunchOut.class);
+                                intent.putExtra("userid",firebaseuser.getUid());
+                                Log.d("user", firebaseuser.getUid());
+                                Toast.makeText(LoginActivity.this,firebaseuser.getUid() , Toast.LENGTH_SHORT).show();
+                                startActivity(intent);
+                                finish();
+                            }else {
+                                Toast.makeText(LoginActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    }
-                });
+                    });
+                }else {
+                    Toast.makeText(LoginActivity.this, "Email and Password cannot be empty", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
