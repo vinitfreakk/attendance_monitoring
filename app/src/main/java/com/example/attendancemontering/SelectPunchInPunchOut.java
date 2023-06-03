@@ -14,6 +14,7 @@ import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -34,6 +35,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -66,8 +68,12 @@ It allows you to customize the appearance and behavior of the biometric dialog, 
     private final static int REQUEST_CODE = 100;
     private String timedede;
 
+    ArrayList<String> months = new ArrayList<>();
+
+
 
     FirebaseDatabase database;
+    FirebaseDatabase forUpdating;
 
     private FirebaseAuth auth;
 
@@ -76,6 +82,19 @@ It allows you to customize the appearance and behavior of the biometric dialog, 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_punch_in_punch_out);
+        //adding months
+        months.add("JAN");
+        months.add("FEB");
+        months.add("MAR");
+        months.add("APR");
+        months.add("MAY");
+        months.add("JUN");
+        months.add("JUL");
+        months.add("AUG");
+        months.add("SEP");
+        months.add("OCT");
+        months.add("NOV");
+        months.add("DEC");
 
         //initializing variables
         mMainlayout = findViewById(R.id.mmainlayout);
@@ -93,6 +112,7 @@ It allows you to customize the appearance and behavior of the biometric dialog, 
 
         //Firebase
         database = FirebaseDatabase.getInstance();
+        forUpdating = FirebaseDatabase.getInstance();
        /* database.getReference().child("Users").child("Attendance");*/
 
         //time
@@ -166,19 +186,92 @@ It allows you to customize the appearance and behavior of the biometric dialog, 
                 /*UserAttendance timestamp = new UserAttendance("Present");*/
                 int hour = calendar.get(Calendar.HOUR_OF_DAY); // 24-hour format
                 int minute = calendar.get(Calendar.MINUTE);
+                int month = calendar.get(Calendar.MONTH);
+                int day = calendar.get(Calendar.DAY_OF_WEEK);
+                String weekName;
+
+                switch (day) {
+                    case 1:
+                        weekName = "Sun";
+                        break;
+                    case 2:
+                        weekName = "Mon";
+                        break;
+                    case 3:
+                        weekName = "Tue";
+                        break;
+                    case 4:
+                        weekName = "Wed";
+                        break;
+                    case 5:
+                        weekName = "Thu";
+                        break;
+                    case 6:
+                        weekName = "Fri";
+                        break;
+                    case 7:
+                        weekName = "Sat";
+                        break;
+                    default:
+                        weekName = "Invalid week";
+                        break;
+                }
+
+                String monthName;
+                switch (month) {
+                    case 0:
+                        monthName = "Jan";
+                        break;
+                    case 1:
+                        monthName = "Feb";
+                        break;
+                    case 2:
+                        monthName = "Mar";
+                        break;
+                    case 3:
+                        monthName = "Apr";
+                        break;
+                    case 4:
+                        monthName = "May";
+                        break;
+                    case 5:
+                        monthName = "Jun";
+                        break;
+                    case 6:
+                        monthName = "Jul";
+                        break;
+                    case 7:
+                        monthName = "Aug";
+                        break;
+                    case 8:
+                        monthName = "Sep";
+                        break;
+                    case 9:
+                        monthName = "Oct";
+                        break;
+                    case 10:
+                        monthName = "Nov";
+                        break;
+                    case 11:
+                        monthName = "Dec";
+                        break;
+                    default:
+                        monthName = "Invalid month";
+                        break;
+                }
                 punchInTime = Integer.toString(hour)+":"+Integer.toString(minute);
 
 
                 LocalDate currentDate = null;
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     currentDate = LocalDate.now();
                 }
                 DateTimeFormatter formatter = null;
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     formatter = DateTimeFormatter.ofPattern("dd_MM_yyyy");
                 }
                 final String formattedDate;
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     formattedDate = currentDate.format(formatter);
                 } else {
                     formattedDate = "Unknown"; // provide a default value
@@ -186,8 +279,9 @@ It allows you to customize the appearance and behavior of the biometric dialog, 
 
                 /* HashMap<String,String>timestamp = new HashMap<>();*/
                 /*  timestamp.put(time,"Present");*/
-                UserAttendance attendance = new UserAttendance(true,false,punchInTime,"not done");
-                database.getReference().child("Users").child(uid).child("Attendance").push().setValue(attendance);
+                UserAttendance attendance = new UserAttendance(punchInTime,"not done",formattedDate.substring(0,2),weekName,monthName,true,false);
+               /* database.getReference().child("Users").child(uid).child("Attendance").push().setValue(attendance);*/
+                database.getReference().child("Users").child(uid).child("Attendance").child(formattedDate).setValue(attendance);
                 Toast.makeText(SelectPunchInPunchOut.this, "Login success", Toast.LENGTH_SHORT).show();
                 /* mMainlayout.setVisibility(View.VISIBLE);*/
             }
@@ -258,6 +352,7 @@ It allows you to customize the appearance and behavior of the biometric dialog, 
 
 
                /* UserAttendance attendance = new UserAttendance(true,true,"15:20",punchOutTime);*/
+
                 database.getReference().child("Users").child(uid).child("Attendance").child(formattedDate).updateChildren(attendance);
                 Toast.makeText(SelectPunchInPunchOut.this, "Login success", Toast.LENGTH_SHORT).show();
             }

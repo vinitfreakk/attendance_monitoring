@@ -1,9 +1,53 @@
 package com.example.attendancemontering.Models;
 
 public class UserAttendance {
-    String TimeStampPunchIN, TimeStampPunchOut;
+    String TimeStampPunchIN, TimeStampPunchOut, date,day,month;
+
+    public UserAttendance(String timeStampPunchIN, String timeStampPunchOut, String date, String day, String month, Boolean punchIn, Boolean punchOut) {
+        TimeStampPunchIN = timeStampPunchIN;
+        TimeStampPunchOut = timeStampPunchOut;
+        this.date = date;
+        this.day = day;
+        this.month = month;
+        this.punchIn = punchIn;
+        this.punchOut = punchOut;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+    public String getMonth() {
+        return month;
+    }
+
+    public void setMonth(String month) {
+        this.month = month;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+
+
     Boolean punchIn,punchOut;
 
+    public UserAttendance(String timeStampPunchIN, String timeStampPunchOut, String day, Boolean punchIn, Boolean punchOut) {
+        TimeStampPunchIN = timeStampPunchIN;
+        TimeStampPunchOut = timeStampPunchOut;
+        this.date = day;
+        this.punchIn = punchIn;
+        this.punchOut = punchOut;
+    }
     public UserAttendance(Boolean punchIn, Boolean punchOut, String timestampin, String timestampout) {
         this.punchIn = punchIn;
         this.punchOut = punchOut;

@@ -36,6 +36,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         RetriveAtt userAttendance = list.get(position);
         holder.timestampPunchIn.setText(userAttendance.getTimeStampPunchIN());
         holder.timestampPunchOut.setText(userAttendance.getTimeStampPunchOut());
+        holder.date.setText(userAttendance.getDate());
+        holder.month.setText(userAttendance.getMonth());
+        holder.day.setText(userAttendance.getDay());
+
     }
 
     @Override
@@ -44,11 +48,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView timestampPunchIn,timestampPunchOut;
+        TextView timestampPunchIn,timestampPunchOut,date,day,month;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             timestampPunchIn = itemView.findViewById(R.id.rtIN);
             timestampPunchOut = itemView.findViewById(R.id.rtOUT);
+            date = itemView.findViewById(R.id.date);
+            day = itemView.findViewById(R.id.day);
+            month = itemView.findViewById(R.id.month);
+
         }
     }
 }

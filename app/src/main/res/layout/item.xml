@@ -14,8 +14,8 @@
         android:layout_margin="10dp"
         android:orientation="horizontal">
         <androidx.cardview.widget.CardView
-            android:layout_width="60dp"
-            android:layout_height="70dp"
+            android:layout_width="65dp"
+            android:layout_height="75dp"
             app:cardCornerRadius="15dp"
             app:cardBackgroundColor="@color/white"
             android:layout_marginLeft="5dp">
@@ -27,15 +27,25 @@
                 android:layout_marginTop="7dp"
                 android:layout_gravity="center_horizontal"
                 android:text="12"
+                android:textSize="12sp"
                 android:fontFamily="@font/poppins_light"
                 android:textStyle="bold"
+                />
+            <TextView
+                android:id="@+id/month"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:layout_marginTop="30dp"
+                android:layout_gravity="center_horizontal"
+                android:text="NOV"
                 />
             <TextView
                 android:id="@+id/day"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:layout_marginTop="34dp"
+                android:layout_marginTop="55dp"
                 android:layout_gravity="center_horizontal"
                 android:text="MON"
                 />

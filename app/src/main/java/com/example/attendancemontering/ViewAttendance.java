@@ -54,6 +54,9 @@ public class ViewAttendance extends AppCompatActivity {
                     RetriveAtt ma = snapshot1.getValue(RetriveAtt.class);
                      String timeStampPunchIN = ma.getTimeStampPunchIN();
                      String timeStampPunchOut = ma.getTimeStampPunchOut();
+                     String date = ma.getDate();
+                     String day = ma.getDay();
+                     String month = ma.getMonth();
                      list.add(ma);
 
                 }

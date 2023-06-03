@@ -1,7 +1,47 @@
 package com.example.attendancemontering.Models;
 
 public class RetriveAtt {
-    String timeStampPunchIN, timeStampPunchOut;
+    String timeStampPunchIN, timeStampPunchOut, date,day,month;
+
+    public RetriveAtt(String timeStampPunchIN, String timeStampPunchOut, String date, String day, String month) {
+        this.timeStampPunchIN = timeStampPunchIN;
+        this.timeStampPunchOut = timeStampPunchOut;
+        this.date = date;
+        this.day = day;
+        this.month = month;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+    public String getMonth() {
+        return month;
+    }
+
+    public void setMonth(String month) {
+        this.month = month;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public RetriveAtt(String timeStampPunchIN, String timeStampPunchOut, String day) {
+        this.timeStampPunchIN = timeStampPunchIN;
+        this.timeStampPunchOut = timeStampPunchOut;
+        this.date = day;
+    }
+
+
     Boolean punchIn,punchOut;
 
     public Boolean getPunchIn() {
