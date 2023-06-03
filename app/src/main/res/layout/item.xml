@@ -58,7 +58,7 @@
                     android:textStyle="bold"
                     android:text="PunchIn"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/rtIN"
@@ -70,7 +70,7 @@
                     android:textStyle="bold"
                     android:layout_marginTop="10dp"
                     android:textColor="@color/black"
-                    android:textSize="20sp"/>
+                    android:textSize="15sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -86,7 +86,7 @@
                     android:textStyle="bold"
                     android:text="PunchOut"
                     android:textColor="@color/black"
-                    android:textSize="20sp"/>
+                    android:textSize="15sp"/>
 
                 <TextView
                     android:id="@+id/rtOUT"
@@ -98,7 +98,7 @@
                     android:textStyle="bold"
                     android:layout_marginTop="10dp"
                     android:textColor="@color/black"
-                    android:textSize="20sp"/>
+                    android:textSize="15sp"/>
             </LinearLayout>
 
 

@@ -119,13 +119,19 @@ It allows you to customize the appearance and behavior of the biometric dialog, 
             @Override
             public void onClick(View v) {
                 PunchOutbiometriccheck();
-               /* int hour = calendar.get(Calendar.HOUR_OF_DAY); // 24-hour format
-                int minute = calendar.get(Calendar.MINUTE);
-                String time = Integer.toString(hour)+":"+Integer.toString(minute);
-                UserAttendance attendance = new UserAttendance(true,true,time,time);*/
-             /*   database.getReference().child("Users").child(uid).child("Attendance").child(formattedDate).setValue(attendance);*/
             }
         });
+
+        //viewAttendance
+        viewatt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ViewAttendance.class);
+                intent.putExtra("id",uid);
+                startActivity(intent);
+            }
+        });
+
 
     }
 
@@ -180,8 +186,8 @@ It allows you to customize the appearance and behavior of the biometric dialog, 
 
                 /* HashMap<String,String>timestamp = new HashMap<>();*/
                 /*  timestamp.put(time,"Present");*/
-                UserAttendance attendance = new UserAttendance(true,false,punchInTime,"");
-                database.getReference().child("Users").child(uid).child("Attendance").child(formattedDate).setValue(attendance);
+                UserAttendance attendance = new UserAttendance(true,false,punchInTime,"not done");
+                database.getReference().child("Users").child(uid).child("Attendance").push().setValue(attendance);
                 Toast.makeText(SelectPunchInPunchOut.this, "Login success", Toast.LENGTH_SHORT).show();
                 /* mMainlayout.setVisibility(View.VISIBLE);*/
             }
@@ -245,7 +251,7 @@ It allows you to customize the appearance and behavior of the biometric dialog, 
                 }
 
 
-                 HashMap attendance = new HashMap<>();
+                HashMap attendance = new HashMap<>();
                 attendance.put("punchOut",true);
                 attendance.put("timeStampPunchOut",punchOutTime);
 

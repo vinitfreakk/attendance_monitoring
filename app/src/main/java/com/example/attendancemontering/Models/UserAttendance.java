@@ -16,7 +16,12 @@ public class UserAttendance {
         this.punchIn = punchIn;
         this.punchOut = punchOut;
     }
-/*public UserAttendance(String timeStampPunchIN, Boolean punchIn) {
+
+    public UserAttendance(String timeStampPunchIN, String timeStampPunchOut) {
+        TimeStampPunchIN = timeStampPunchIN;
+        TimeStampPunchOut = timeStampPunchOut;
+    }
+    /*public UserAttendance(String timeStampPunchIN, Boolean punchIn) {
         TimeStampPunchIN = timeStampPunchIN;
         this.punchIn = punchIn;
     }
