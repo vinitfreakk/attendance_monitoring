@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mmainlayout"
-    android:background="@color/logreg"
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SelectPunchInPunchOut">
@@ -11,7 +11,7 @@
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottieAnimationView"
         android:layout_width="0dp"
-        android:background="@color/logreg"
+        android:background="@color/white"
         android:layout_height="331dp"
         android:layout_marginStart="2dp"
 
@@ -51,7 +51,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="Location: "
-                   android:textColor="@color/btnback"
+                   android:textColor="@color/black"
                     android:textSize="25sp"
                     android:textStyle="bold" />
 
@@ -61,7 +61,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:lines="3"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="25sp"
                     android:textStyle="bold" />
 
@@ -78,7 +78,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Time: "
-                    android:textColor="@color/btnback"
+                    android:textColor="@color/black"
                     android:textSize="25sp"
                     android:textStyle="bold" />
 
@@ -88,7 +88,7 @@
                     android:layout_height="wrap_content"
                     android:text="TIme:"
                     android:layout_marginStart="41dp"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="25sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -107,6 +107,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/btnback"
                     android:elevation="10dp"
+                    android:textColor="@color/white"
                     android:text="punchin" />
 
                 <Button
@@ -115,6 +116,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_weight="1"
+                    android:textColor="@color/white"
                     android:background="@drawable/btnback"
                     android:elevation="10dp"
                     android:text="Punchout" />
@@ -131,7 +133,8 @@
                 android:layout_marginEnd="10dp"
                 android:background="@drawable/btnback"
                 android:elevation="10dp"
-                android:text="View" />z
+                android:text="View"
+                android:textColor="@color/white" />
         </LinearLayout>
 
 

@@ -2,9 +2,12 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="logreg">#152534</color>
+   <!-- <color name="logreg">#152534</color>-->
+    <color name="logreg">#98A8F8</color>
     <color name="border">#808080</color>
-    <color name="btnback">#c0e862</color>
+   <!-- <color name="btnback">#c0e862</color>-->
+    <color name="btnback">#f5c300</color>
     <color name="attback">#e8e8e8</color>
+    <color name="back">#FB2576</color>
 
 </resources>

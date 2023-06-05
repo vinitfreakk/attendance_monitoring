@@ -3,7 +3,13 @@
     <style name="Base.Theme.AttendanceMontering" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
+
     </style>
 
     <style name="Theme.AttendanceMontering" parent="Base.Theme.AttendanceMontering" />
+
+
+
+
 </resources>

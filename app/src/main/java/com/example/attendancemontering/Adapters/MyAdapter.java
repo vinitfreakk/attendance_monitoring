@@ -36,12 +36,20 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         RetriveAtt userAttendance = list.get(position);
-        if(userAttendance.getPunchIn().equals(true)&&userAttendance.getPunchOut().equals(true)){
+       /* if(userAttendance.getPunchIn().equals(true)&&userAttendance.getPunchOut().equals(true)){
             holder.maincard.setCardBackgroundColor(Color.parseColor("#66c341"));
             holder.daycard.setCardBackgroundColor(Color.parseColor("#f5c300"));
         }else {
             holder.maincard.setCardBackgroundColor(Color.parseColor("#f5c500"));
             holder.daycard.setCardBackgroundColor(Color.parseColor("#844266"));
+        }*/
+        if(userAttendance.getPunchIn().equals(true)&&userAttendance.getPunchOut().equals(true)){
+
+            holder.maincard.setCardBackgroundColor(Color.parseColor("#88FFF7"));
+            holder.daycard.setCardBackgroundColor(Color.parseColor("#96BAFF"));
+        }else {
+            holder.maincard.setCardBackgroundColor(Color.parseColor("#B799FF"));
+            holder.daycard.setCardBackgroundColor(Color.parseColor("#ACBCFF"));
         }
 
 

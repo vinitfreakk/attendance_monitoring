@@ -11,6 +11,11 @@ public class RetriveAtt {
         this.month = month;
     }
 
+    public RetriveAtt(Boolean punchIn) {
+        this.punchIn = punchIn;
+    }
+
+
     public String getDay() {
         return day;
     }
