@@ -86,7 +86,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Intent intent = new Intent(LoginActivity.this,SelectPunchInPunchOut.class);
                                 intent.putExtra("userid",firebaseuser.getUid());
                                 Log.d("user", firebaseuser.getUid());
-                                Toast.makeText(LoginActivity.this,firebaseuser.getUid() , Toast.LENGTH_SHORT).show();
+                             /*   Toast.makeText(LoginActivity.this,firebaseuser.getUid() , Toast.LENGTH_SHORT).show();*/
                                 startActivity(intent);
                                 finish();
                             }else {

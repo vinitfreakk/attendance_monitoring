@@ -298,7 +298,7 @@ It allows you to customize the appearance and behavior of the biometric dialog, 
                 UserAttendance attendance = new UserAttendance(punchInTime,"not done",formattedDate.substring(0,2),weekName,monthName,true,false);
                /* database.getReference().child("Users").child(uid).child("Attendance").push().setValue(attendance);*/
                 database.getReference().child("Users").child(uid).child("Attendance").child(formattedDate).setValue(attendance);
-                Toast.makeText(SelectPunchInPunchOut.this, "Login success", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SelectPunchInPunchOut.this, "Biometric  enrolled", Toast.LENGTH_SHORT).show();
                 /* mMainlayout.setVisibility(View.VISIBLE);*/
             }
 
@@ -370,7 +370,7 @@ It allows you to customize the appearance and behavior of the biometric dialog, 
                /* UserAttendance attendance = new UserAttendance(true,true,"15:20",punchOutTime);*/
 
                 database.getReference().child("Users").child(uid).child("Attendance").child(formattedDate).updateChildren(attendance);
-                Toast.makeText(SelectPunchInPunchOut.this, "Login success", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SelectPunchInPunchOut.this, "Biometric  enrolled", Toast.LENGTH_SHORT).show();
             }
 
             @Override
